@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+            })
+            .catch(e => console.error(e))
+    }
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar fixed bg-base-100 px-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -15,7 +25,10 @@ const Navbar = () => {
                         <li><a>About</a></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">Qzone</a>
+                <Link><button className="btn btn-ghost normal-case text-3xl mr-2">Qzone</button></Link>
+                <div className="form-control mr-2">
+                    <input type="text" placeholder="Search" className="input h-9 w-60 input-bordered" />
+                </div>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -26,9 +39,12 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <div className="form-control mr-2">
-                    <input type="text" placeholder="Search" className="input h-8 w-40 input-bordered" />
-                </div>
+                {
+                    user?.uid ?
+                        <button onClick={handleLogout} className='btn btn-outline btn-dark btn-sm h-4 mr-2'>LogOut</button>
+                        :
+                        <Link to='/login'><button className='btn btn-outline btn-info btn-sm h-4 mr-2'>Login</button></Link>
+                }
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-8 rounded-full">
                         <img src="https://placeimg.com/80/80/people" />

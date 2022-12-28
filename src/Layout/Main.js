@@ -9,14 +9,14 @@ const Main = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className='grid grid-cols-12'>
-                <div className='col-span-2'>
+            <div className='grid grid-cols-3 w-full pt-16 bg-slate-50'>
+                <div className='pl-16'>
                     <LeftSideNav></LeftSideNav>
                 </div>
-                <div className='col-span-8'>
+                <div >
                     <Outlet></Outlet>
                 </div>
-                <div className='col-span-2'>
+                <div className='pr-16'>
                     <RightSideNave></RightSideNave>
                 </div>
             </div >
