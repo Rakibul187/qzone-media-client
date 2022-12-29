@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import PostCard from '../../../Shared/Posts/PostCard';
 
 const Home = () => {
+    const { user } = useContext(AuthContext)
+    const posts = useLoaderData()
+
     const handlePostSubmit = event => {
         event.preventDefault()
-        console.log(event.target.image.files[0])
+        const form = event.target
+        // console.log(form.image.files[0])
+        const image = form.image.files[0]
+        const text = form.post.value
+        const name = user?.displayName
+
+        const formData = new FormData()
+        formData.append('image', image)
+        const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageapikey}`
+        fetch(url, {
+            method: "POSt",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                    console.log(imgData.data.url)
+                    const postData = {
+                        postImg: imgData.data.url,
+                        postmanImg: user?.photoURL,
+                        text: text,
+                        name: name,
+                        like: 0,
+                        comment: ''
+                    }
+                    console.log(postData)
+                    fetch('http://localhost:5000/addpost', {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(postData)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                console.log(data)
+                            }
+                        })
+                }
+            })
     }
     return (
         <div>
@@ -16,25 +62,12 @@ const Home = () => {
                     <button type="submit">Add post</button></div>
             </form>
             <div className="divider"></div>
-            <div className="w-full bg-base-100 shadow-xl">
-                <div className="ml-5 my-1 flex items-center">
-                    <img
-                        className="w-10 rounded-full"
-                        src="https://placeimg.com/80/80/people" alt='' />
-                    <h1 className='text-lg font-semibold ml-2'>Rakib Hasnat</h1>
-                </div>
-                <div className="mt-0 mb-3 ">
-                    <p className='text-left px-2'>If a dog chews shoes whose shoes does he choose?If a dog chews shoes whose shoes does he choose?If a dog chews shoes whose shoes does he choose?If a dog chews shoes whose shoes does he choose?If a dog chews shoes whose shoes does he choose?If a dog chews shoes whose shoes does he choose?If a dog chews shoes whose shoes does he choose?If a dog chews shoes whose shoes does he choose?</p>
-                </div>
-                <figure
-
-                ><img
-                        className='mx-auto w-full p-4'
-                        src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-                <div className='flex justify-between mx-4 py-4'>
-                    <p>like</p>
-                    <p>Comment</p>
-                </div>
+            <div>
+                {posts.map(post => <PostCard
+                    key={post._id}
+                    post={post}
+                ></PostCard>
+                )}
             </div>
         </div>
     );
