@@ -5,8 +5,11 @@ const Message = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className='pt-24'>
-                <h1>Cooming soon</h1>
+
+            <div className='bg-slate-50 h-[100vh]'>
+                <div className='pt-24'>
+                    <h1>Cooming soon</h1>
+                </div>
             </div>
         </div>
     );
