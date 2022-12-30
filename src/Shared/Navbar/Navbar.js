@@ -26,8 +26,8 @@ const Navbar = () => {
                         <li><Link to='/about'>About</Link></li>
                     </ul>
                 </div>
-                <Link><button className="btn btn-ghost normal-case text-3xl mr-2">Qzone</button></Link>
-                <div className="form-control sm:invisible mr-2">
+                <Link to='/'><button className="btn btn-ghost normal-case text-3xl mr-2"><span className='text-4xl text-primary h-10'>Q</span>zone</button></Link>
+                <div className="form-control hidden md:block lg:block mr-2">
                     <input type="text" placeholder="Search" className="input h-9 w-60 input-bordered" />
                 </div>
             </div>
@@ -52,7 +52,7 @@ const Navbar = () => {
                             user?.uid ?
                                 <img src={user?.photoURL} alt='' />
                                 :
-                                <span className='text-xl'><FaUserNinja></FaUserNinja></span>
+                                <span className='text-xl text-primary'><FaUserNinja></FaUserNinja></span>
                         }
 
                     </div>

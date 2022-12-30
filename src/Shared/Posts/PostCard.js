@@ -26,7 +26,7 @@ const PostCard = ({ post }) => {
                     className='mx-auto h-[300px] w-full p-4'
                     src={postImg} alt="Shoes" /></figure>
             <div className='flex justify-between mx-4 py-4'>
-                <Link to={`/postDetails/${_id}`}><button className='btn btn-ghost'>{like} like</button></Link>
+                <Link ><button className='btn btn-ghost'>{like} like</button></Link>
                 <Link to={`/postDetails/${_id}`}><button className='btn btn-ghost'>Comment</button></Link>
             </div>
         </div>

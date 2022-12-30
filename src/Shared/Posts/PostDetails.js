@@ -20,7 +20,7 @@ const PostDetails = () => {
             useName: user.displayName,
             comment: text
         }
-        fetch('http://localhost:5000/comment', {
+        fetch('https://qzone-media-server.vercel.app/comment', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ const PostDetails = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comment/${_id}`)
+        fetch(`https://qzone-media-server.vercel.app/comment/${_id}`)
             .then(res => res.json())
             .then(data => setComments(data))
     }, [_id])

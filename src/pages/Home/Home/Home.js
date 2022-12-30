@@ -20,7 +20,7 @@ const Home = () => {
         formData.append('image', image)
         const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageapikey}`
         fetch(url, {
-            method: "POSt",
+            method: "POST",
             body: formData
         })
             .then(res => res.json())
@@ -36,7 +36,7 @@ const Home = () => {
                         comment: ''
                     }
                     console.log(postData)
-                    fetch('http://localhost:5000/addpost', {
+                    fetch('https://qzone-media-server.vercel.app/addpost', {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ const Home = () => {
             </form>
             <div className="divider"></div>
             <div>
-                {posts.map(post => <PostCard
+                {posts?.map(post => <PostCard
                     key={post._id}
                     post={post}
                 ></PostCard>

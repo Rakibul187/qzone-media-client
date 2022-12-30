@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/', element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/posts')
+                loader: () => fetch('https://qzone-media-server.vercel.app/posts')
             },
         ]
     },
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/media', element: <Media></Media>,
-        loader: () => fetch('http://localhost:5000/posts')
+        loader: () => fetch('https://qzone-media-server.vercel.app/posts')
     },
     {
         path: '/message', element: <Message></Message>
@@ -37,6 +37,6 @@ export const router = createBrowserRouter([
     },
     {
         path: '/postdetails/:id', element: <PostDetails></PostDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/postdetails/${params.id}`)
+        loader: ({ params }) => fetch(`https://qzone-media-server.vercel.app/postdetails/${params.id}`)
     }
 ])

@@ -1,5 +1,6 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import Navbar from '../../Shared/Navbar/Navbar';
@@ -17,6 +18,8 @@ const Register = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
+                toast.success('Signup Successfully!')
+                form.reset()
             })
             .catch(e => console.error(e))
     }
