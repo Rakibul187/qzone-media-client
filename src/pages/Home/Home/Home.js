@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import PostCard from '../../../Shared/Posts/PostCard';
@@ -45,7 +46,7 @@ const Home = () => {
                         .then(res => res.json())
                         .then(data => {
                             if (data.acknowledged) {
-                                console.log(data)
+                                toast.success('Post added successfully!')
                             }
                         })
                 }

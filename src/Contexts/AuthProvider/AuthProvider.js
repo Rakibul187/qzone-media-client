@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
             setLoading(false)
         })
         return () => unsubscribe()
-    }, [])
+    }, [user])
 
 
     const logOut = () => {

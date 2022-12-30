@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PostCard = ({ post }) => {
-    const { postImg, name, like, comment, _id, text, postmanImg } = post
+    const { postImg, name, like, _id, text, postmanImg } = post
     return (
         <div className="w-full bg-base-100 mb-10 pt-2 shadow-xl">
             <div className="ml-5 my-1 flex items-center">
@@ -26,8 +26,8 @@ const PostCard = ({ post }) => {
                     className='mx-auto h-[300px] w-full p-4'
                     src={postImg} alt="Shoes" /></figure>
             <div className='flex justify-between mx-4 py-4'>
-                <p>{like} like</p>
-                <p>{comment} Comment</p>
+                <Link to={`/postDetails/${_id}`}><button className='btn btn-ghost'>{like} like</button></Link>
+                <Link to={`/postDetails/${_id}`}><button className='btn btn-ghost'>Comment</button></Link>
             </div>
         </div>
     );

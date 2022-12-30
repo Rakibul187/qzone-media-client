@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import { FaUserNinja } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -26,7 +27,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link><button className="btn btn-ghost normal-case text-3xl mr-2">Qzone</button></Link>
-                <div className="form-control mr-2">
+                <div className="form-control sm:invisible mr-2">
                     <input type="text" placeholder="Search" className="input h-9 w-60 input-bordered" />
                 </div>
             </div>
@@ -47,7 +48,13 @@ const Navbar = () => {
                 }
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-6 rounded-full">
-                        <img src={user?.photoURL} alt='' />
+                        {
+                            user?.uid ?
+                                <img src={user?.photoURL} alt='' />
+                                :
+                                <span className='text-xl'><FaUserNinja></FaUserNinja></span>
+                        }
+
                     </div>
                 </label>
             </div>

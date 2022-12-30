@@ -32,7 +32,7 @@ const Register = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className="hero min-h-screen bg-base-200">
+            <div className="hero min-h-screen pt-10 bg-base-200">
                 <div className="hero-content">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <form onSubmit={handleEmailPassSignup} className="card-body">

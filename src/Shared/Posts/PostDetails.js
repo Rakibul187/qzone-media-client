@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import Navbar from '../Navbar/Navbar';
@@ -8,8 +9,6 @@ const PostDetails = () => {
     const [comments, setComments] = useState([])
     const post = useLoaderData()
     const { user } = useContext(AuthContext)
-    console.log(user)
-    console.log(post)
     const { postImg, postmanImg, name, text, _id } = post;
 
     const handleCommentSubmit = event => {
@@ -31,7 +30,7 @@ const PostDetails = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    console.log(data)
+                    toast.success('Comment added successfully!')
                     event.target.reset()
                 }
             })
@@ -53,7 +52,7 @@ const PostDetails = () => {
                         <div className="w-full bg-base-100 pt-2 shadow-xl">
                             <div className="ml-5 my-1 flex items-center">
                                 <img
-                                    className="w-10 rounded-full"
+                                    className="w-10 h-10 rounded-full"
                                     src={post?.postmanImg ? postmanImg : postImg} alt='' />
                                 <h1 className='text-lg font-semibold ml-2'>{name}</h1>
                             </div>
@@ -65,7 +64,7 @@ const PostDetails = () => {
                             <figure
 
                             ><img
-                                    className='mx-auto h-full w-full p-4'
+                                    className='mx-auto h-[300px] w-full p-4'
                                     src={postImg} alt="Shoes" /></figure>
                         </div>
                     </div>
